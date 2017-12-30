@@ -1,0 +1,33 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+
+# An example controller showing how to use dependency injection
+GET     /count                      controllers.CountController.count
+# An example controller showing how to write asynchronous code
+GET     /message                    controllers.AsyncController.message
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+# Creating a new user to system
+PUT     /adduser                    controllers.UserController.addUser()
+
+# Changing user information
+POST    /changeuser                 controllers.UserController.changeUser()
+
+# Shows user information with user's orders
+GET     /user/:userid               controllers.UserController.getUserInfo(userid : String)
+
+# Adding an article
+PUT     /addarticle                 controllers.ArticleController.addArticle()
+
+# Getting Articles
+GET     /articles/:articleid        controllers.ArticleController.getArticle(articleid : Int)
+
+# Adding an order
+PUT     /addorder/:username         controllers.OrderController.addOrder(username : String)
+
+# Cancelling order
+GET     /cancelOrder/:orderid      controllers.OrderController.cancelOrder(orderid : Int)
+
+
+GET     /getarticles/:page         controllers.ArticleController.getArticleList(page : Int)
