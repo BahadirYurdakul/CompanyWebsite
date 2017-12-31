@@ -6,7 +6,6 @@ import play.data.validation.Constraints;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.Date;
 
 @Entity
 public class Article extends Model {
@@ -41,7 +40,6 @@ public class Article extends Model {
         this.photoLink = photoLink;
         this.content = content;
         this.author = author;
-        this.date = new Date().toString();
     }
 
     public String getTitle() {

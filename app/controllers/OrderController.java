@@ -14,5 +14,9 @@ public class OrderController {
         return null;
     }
 
+    public Result getOrders(int page) {
+
+    }
+
 
 }

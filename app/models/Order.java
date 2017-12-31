@@ -1,17 +1,38 @@
 package models;
 
-import com.google.gson.*;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import com.avaje.ebean.Model;
+import play.data.validation.Constraints;
 
-public class Order {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class Order extends Model {
+
+    @Id
+    @Column(name = "orderNo")
     private int orderNo;
-    private final String username;
-    private final int numberOfOrder;
-    private final int status;
-    private final String  productName;
-    private final String desiredProperties;
+
+    @Constraints.Required
+    @Column(name = "username")
+    private String username;
+
+    @Constraints.Required
+    @Column(name = "numberOfOrder")
+    private int numberOfOrder;
+
+    @Constraints.Required
+    @Column(name = "status")
+    private int status;
+
+    @Constraints.Required
+    @Column(name = "productName")
+    private String  productName;
+
+    @Constraints.Required
+    @Column(name = "desiredProperties")
+    private String desiredProperties;
 
     private Order(String username, int numberOfOrder, int status, String productName, String desiredProperties) {
         this.username = username;
@@ -39,6 +60,10 @@ public class Order {
 
     public int getStatus() {
         return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public String getProductName() {
