@@ -12,7 +12,7 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 PUT     /adduser                    controllers.UserController.addUser()
 
 # Changing user information
-POST    /changeuser                 controllers.UserController.changeUser()
+PUT    /changeuser                 controllers.UserController.changeUser()
 
 # Shows user information with user's orders
 GET     /user/:userid               controllers.UserController.getUserInfo(userid : String)

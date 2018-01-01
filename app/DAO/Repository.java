@@ -2,6 +2,8 @@ package DAO;
 
 import com.avaje.ebean.Ebean;
 import models.Article;
+import models.Order;
+import models.User;
 
 import java.util.Date;
 import java.util.List;
@@ -34,4 +36,38 @@ public enum Repository {
                         .getList();
     }
 
+    public User addUser(User user) {
+        user.save();
+        User getUser = Ebean.find(User.class).where()
+                .eq("username",user.getUsername())
+                .findList().get(0);
+        getUser.setPassword("");
+        return getUser;
+    }
+
+    public User changeUserInfo(User user) {
+        User.db().update(user);
+        User getUser = Ebean.find(User.class).where()
+                .eq("username",user.getUsername())
+                .findList().get(0);
+        getUser.setPassword("");
+        return getUser;
+    }
+
+    public User getUser(String username) {
+        User user = Ebean.find(User.class).where()
+                .eq("username",username)
+                .findList().get(0);
+        user.setPassword("");
+        return user;
+    }
+
+    public List<Order> getOrders(int page) {
+        int pageSize = 10;
+        return
+                db().find(Order.class).where()
+                        .order().desc("orderNo")
+                        .findPagedList(page, pageSize)
+                        .getList();
+    }
 }

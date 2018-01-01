@@ -1,6 +1,7 @@
 package models;
 
 import com.avaje.ebean.Model;
+import com.fasterxml.jackson.databind.JsonNode;
 import play.data.validation.Constraints;
 
 import javax.persistence.Column;
@@ -12,34 +13,33 @@ public class User extends Model{
     @Id
     @Constraints.Required
     @Column(name = "username")
-    private final String username;
+    private String username;
 
-    @Constraints.Min(6)
+
     @Column(name = "password")
-    private final String password;
+    private String password;
 
-    @Constraints.Email
     @Column(name = "email")
-    private final String email;
+    private String email;
 
     @Constraints.Required
     @Column(name = "telephone")
-    private final String telephone;
+    private String telephone;
 
     @Column(name = "companyName")
-    private final String companyName;
+    private String companyName;
 
     @Column(name = "companyAddress")
-    private final String companyAddress;
+    private String companyAddress;
 
     @Column(name = "title")
-    private final String title;
+    private String title;
 
     @Constraints.Required
     @Column(name = "nameSurname")
-    private final String nameSurname;
+    private String nameSurname;
 
-    private User(String username, String password, String email, String telephone, String companyName, String companyAddress, String title, String nameSurname) {
+    public User(String username, String password, String email, String telephone, String companyName, String companyAddress, String title, String nameSurname) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -52,6 +52,10 @@ public class User extends Model{
 
     public String getUsername() {
         return username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getPassword() {
@@ -82,5 +86,11 @@ public class User extends Model{
         return nameSurname;
     }
 
+    public static User getUser(JsonNode jsonNode){
+        return new User(jsonNode.get("username").asText(),jsonNode.get("password").asText()
+                        ,jsonNode.get("email").asText(),jsonNode.get("telephone").asText()
+                        ,jsonNode.get("companyName").asText(),jsonNode.get("companyAddress").asText()
+                        ,jsonNode.get("title").asText(),jsonNode.get("nameSurname").asText());
+    }
 
 }
