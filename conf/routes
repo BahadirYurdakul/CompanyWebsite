@@ -2,32 +2,38 @@
 # This file defines all application routes (Higher priority routes first)
 
 # An example controller showing how to use dependency injection
-GET     /count                      controllers.CountController.count
+GET     /count                              controllers.CountController.count
+
 # An example controller showing how to write asynchronous code
-GET     /message                    controllers.AsyncController.message
+GET     /message                            controllers.AsyncController.message
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+GET     /assets/*file                       controllers.Assets.versioned(path="/public", file: Asset)
+
 # Creating a new user to system
-PUT     /adduser                    controllers.UserController.addUser()
+PUT     /accounts/signup                   controllers.UserController.addUser()
 
 # Changing user information
-PUT    /changeuser                 controllers.UserController.changeUser()
+PUT    /accounts/changeaccountinfo                          controllers.UserController.changeUser()
 
 # Shows user information with user's orders
-GET     /user/:userid               controllers.UserController.getUserInfo(userid : String)
+GET     /accounts/:username/accountinfo     controllers.UserController.getUserInfo(username : String)
 
 # Adding an article
-PUT     /addarticle                 controllers.ArticleController.addArticle()
+PUT     /addarticle                         controllers.ArticleController.addArticle()
+
+#Getting articles list of given page
+GET     /articles/getarticles/page/:page    controllers.ArticleController.getArticleList(page : Int)
 
 # Getting Articles
-GET     /articles/:articleid        controllers.ArticleController.getArticle(articleid : Int)
+GET     /articles/getarticalinfo/title/:title                controllers.ArticleController.getArticle(title : String)
 
 # Adding an order
-PUT     /addorder/:username         controllers.OrderController.addOrder(username : String)
+PUT     /addorder/:username                 controllers.OrderController.addOrder(username : String)
 
 # Cancelling order
-GET     /cancelOrder/:orderid      controllers.OrderController.cancelOrder(orderid : Int)
+GET     /cancelOrder/:orderid               controllers.OrderController.cancelOrder(orderid : Int)
 
 
-GET     /getarticles/:page         controllers.ArticleController.getArticleList(page : Int)
+GET     /accounts/:username/orderofaccount/page/:page   controllers.OrderController.getOrders(username : String, page : Int)
+

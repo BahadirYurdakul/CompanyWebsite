@@ -36,11 +36,11 @@ public  enum  ArticleService {
 
     /**
      * Gets a specific article
-     * @param articleId is the unique identifier of the article
+     * @param title is the unique identifier of the article
      * @return article object.
      */
-    public Article getArticle(int articleId) {
-        return repository.getArticle(articleId);
+    public Article getArticle(String title) {
+        return repository.getArticle(title);
     }
 
 
