@@ -3,23 +3,22 @@ package services;
 import models.Order;
 import DAO.Repository;
 
-public class OrderService {
+import java.util.List;
+
+public enum  OrderService {
+    ORDER_SERVICE;
     private static Repository repository = Repository.REPOSITORY;
 
-    public Order addOrder(String username,Order order) {
-        if(!repository.isUserExist(username)) {
-            // TODO: 03.12.2017 logging
-            return null;
-        } else {
-            return repository.addOrder(username,order);
-        }
+    public Order addOrder(Order order) {
+        if(!repository.isUserExist(order.getUsername()))  return null;
+        else return repository.addOrder(order);
     }
 
-    public boolean cancelOrder(int orderId) {
+    public Order cancelOrder(int orderId) {
         return repository.cancelOrder(orderId);
     }
 
-    public Order[] getOrderList(String username, int page) {
+    public List<Order> getOrders(String username, int page) {
         return repository.getOrders(username,page);
     }
-ggit}
+}

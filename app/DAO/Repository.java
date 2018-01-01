@@ -23,8 +23,10 @@ public enum Repository {
         return list.get(0);
     }
 
-    public Article getArticle(int articleId) {
-        return db().find(Article.class,articleId);
+    public Article getArticle(String title) {
+        return db().find(Article.class).where()
+                .eq("title",title)
+                .findList().get(0);
     }
 
     public List<Article> getArticles(int page) {
@@ -62,12 +64,43 @@ public enum Repository {
         return user;
     }
 
-    public List<Order> getOrders(int page) {
+    public boolean isUserExist(String username) {
+        return Ebean.find(User.class).where()
+                .eq("username", username)
+                .findList().size() != 0;
+    }
+
+    public List<Order> getOrders(String username, int page) {
         int pageSize = 10;
         return
                 db().find(Order.class).where()
+                        .eq("username",username)
                         .order().desc("orderNo")
                         .findPagedList(page, pageSize)
                         .getList();
+    }
+
+    public Order addOrder(Order order) {
+        order.save();
+        return Ebean.find(Order.class)
+                .where()
+                .eq("username", order.getUsername())
+                .order().desc("orderId")
+                .findPagedList(1,1)
+                .getList().get(0);
+    }
+
+    public Order getOrder(int orderId) {
+        return Ebean.find(Order.class).where()
+                .eq("orderId",orderId)
+                .findList().get(0);
+    }
+
+    public Order cancelOrder(int orderId) {
+        Order order = Ebean.find(Order.class,orderId);
+        assert order != null;
+        order.setStatus(2);
+        order.save();
+        return Ebean.find(Order.class,orderId);
     }
 }

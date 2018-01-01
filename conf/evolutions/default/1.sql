@@ -13,6 +13,16 @@ create table article (
   constraint pk_article primary key (articleid)
 );
 
+create table order (
+  orderno                       integer auto_increment not null,
+  username                      varchar(255),
+  numberoforder                 integer,
+  status                        integer,
+  productname                   varchar(255),
+  desiredproperties             varchar(255),
+  constraint pk_order primary key (orderno)
+);
+
 create table user (
   username                      varchar(255) not null,
   password                      varchar(255),
@@ -29,6 +39,8 @@ create table user (
 # --- !Downs
 
 drop table if exists article;
+
+drop table if exists order;
 
 drop table if exists user;
 

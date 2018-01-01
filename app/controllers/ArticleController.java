@@ -41,10 +41,10 @@ public class ArticleController extends Controller {
      * @param articleId is the unique integer number of each article
      * @return the article object of given article Id
      */
-    public Result getArticle(int articleId) {
+    public Result getArticle(String title) {
         try {
             Gson gson = new Gson();
-            Article article = articleService.getArticle(articleId);
+            Article article = articleService.getArticle(title);
             return ok(Ebean.json().toJson(article));
         } catch (Exception e) {
             System.out.println(e);
