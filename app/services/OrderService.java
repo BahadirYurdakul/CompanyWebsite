@@ -10,8 +10,7 @@ public enum  OrderService {
     private static Repository repository = Repository.REPOSITORY;
 
     public Order addOrder(Order order) {
-        if(!repository.isUserExist(order.getUsername()))  return null;
-        else return repository.addOrder(order);
+       return repository.addOrder(order);
     }
 
     public Order cancelOrder(int orderId) {

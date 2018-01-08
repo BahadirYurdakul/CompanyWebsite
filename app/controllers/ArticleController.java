@@ -32,13 +32,13 @@ public class ArticleController extends Controller {
                 ));
             } catch (Exception e){
                 System.out.println(e);
-                return badRequest("Adding Article Failed! Please check all inputs!").as("text/html");
+                return badRequest(Ebean.json().toJson("Adding Article Failed! Please check all inputs!")).as("text/html");
             }
        }
 
     /**
      * Calls ArticleService layer to get a specific article by using articleId
-     * @param articleId is the unique integer number of each article
+     * @param title  is the unique title of each article
      * @return the article object of given article Id
      */
     public Result getArticle(String title) {
@@ -48,7 +48,7 @@ public class ArticleController extends Controller {
             return ok(Ebean.json().toJson(article));
         } catch (Exception e) {
             System.out.println(e);
-            return notFound("Not found! Please check again!");
+            return notFound(Ebean.json().toJson("Not found! Please check again!"));
         }
     }
 
@@ -63,7 +63,7 @@ public class ArticleController extends Controller {
                     articleService.getArticles(page)
             ));
         } catch (Exception e) {
-            return badRequest("invalid entry");
+            return badRequest(Ebean.json().toJson("invalid entry"));
         }
     }
 

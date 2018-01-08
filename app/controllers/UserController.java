@@ -19,7 +19,7 @@ public class UserController extends Controller {
             ));
         } catch (Exception e) {
             System.out.println(e);
-            return badRequest("Creating user failed! Check all conditions");
+            return badRequest(Ebean.json().toJson("Creating user failed! Check all conditions"));
         }
     }
 
@@ -32,7 +32,7 @@ public class UserController extends Controller {
           ));
       } catch (Exception e) {
           System.out.println(e);
-          return badRequest("Changing information failed");
+          return badRequest(Ebean.json().toJson("Changing information failed"));
       }
     }
 
@@ -43,7 +43,7 @@ public class UserController extends Controller {
             ));
         } catch (Exception e) {
             System.out.println(e);
-            return badRequest("failed!");
+            return badRequest(Ebean.json().toJson("failed!"));
         }
     }
 }

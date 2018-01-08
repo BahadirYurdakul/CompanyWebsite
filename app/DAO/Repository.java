@@ -1,6 +1,8 @@
 package DAO;
 
 import com.avaje.ebean.Ebean;
+import com.avaje.ebean.SqlQuery;
+import com.avaje.ebean.SqlRow;
 import models.Article;
 import models.Order;
 import models.User;
@@ -75,19 +77,19 @@ public enum Repository {
         return
                 db().find(Order.class).where()
                         .eq("username",username)
-                        .order().desc("orderNo")
+                        .orderBy("orderno")
                         .findPagedList(page, pageSize)
                         .getList();
     }
 
     public Order addOrder(Order order) {
-        order.save();
-        return Ebean.find(Order.class)
-                .where()
-                .eq("username", order.getUsername())
-                .order().desc("orderId")
-                .findPagedList(1,1)
-                .getList().get(0);
+        Ebean.createSqlUpdate("INSERT INTO `db`.`order` (`username`, `numberoforder`, `status`, `productname`," +
+                " `desiredproperties`) VALUES ('"+order.getUsername()+"', '"+order.getNumberOfOrder()+"', '"
+                +order.getStatus()+"', '"+order.getProductName()+"', '"+order.getDesiredProperties()+"');\n").execute();
+//      return db().find(Order.class)
+//                .where().eq("username",order.getUsername())
+//                .order().desc("orderNo").findList().get(0);
+        return db().find(Order.class,1);
     }
 
     public Order getOrder(int orderId) {

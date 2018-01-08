@@ -10,9 +10,12 @@ import services.OrderService;
 public class OrderController extends Controller{
     private OrderService orderService = OrderService.ORDER_SERVICE;
 
-    public Result addOrder(String username) {
+    public Result addOrder() {
         Http.RequestBody body = request().body();
-        Order order = Ebean.json().toBean(Order.class,body.asText());
+//        Order order = Order.getOrder(body.asJson());
+//        order.save();
+        Order order = new Order("na2me",2,2,"sad2sik","asd");
+//        Ebean.save(order);
         return ok(
                 Ebean.json().toJson(
                         orderService.addOrder(order)

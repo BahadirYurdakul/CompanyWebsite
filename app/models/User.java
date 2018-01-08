@@ -16,9 +16,11 @@ public class User extends Model{
     private String username;
 
 
+    @Constraints.Required
     @Column(name = "password")
     private String password;
 
+    @Constraints.Required
     @Column(name = "email")
     private String email;
 
@@ -39,7 +41,7 @@ public class User extends Model{
     @Column(name = "nameSurname")
     private String nameSurname;
 
-    public User(String username, String password, String email, String telephone, String companyName, String companyAddress, String title, String nameSurname) {
+    private User(String username, String password, String email, String telephone, String companyName, String companyAddress, String title, String nameSurname) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -58,33 +60,7 @@ public class User extends Model{
         this.password = password;
     }
 
-    public String getPassword() {
-        return password;
-    }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public String getCompanyAddress() {
-        return companyAddress;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getNameSurname() {
-        return nameSurname;
-    }
 
     public static User getUser(JsonNode jsonNode){
         return new User(jsonNode.get("username").asText(),jsonNode.get("password").asText()
