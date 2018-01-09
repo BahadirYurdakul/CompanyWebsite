@@ -56,6 +56,14 @@ public class User extends Model{
         return username;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword(){
+        return password;
+    }
+
     public void setPassword(String password) {
         this.password = password;
     }
@@ -63,7 +71,7 @@ public class User extends Model{
 
 
     public static User getUser(JsonNode jsonNode){
-        return new User(jsonNode.get("username").asText(),jsonNode.get("password").asText()
+        return new User(jsonNode.get("username").asText(),jsonNode.get("password").asText() == null ? "" : ""
                         ,jsonNode.get("email").asText(),jsonNode.get("telephone").asText()
                         ,jsonNode.get("companyName").asText(),jsonNode.get("companyAddress").asText()
                         ,jsonNode.get("title").asText(),jsonNode.get("nameSurname").asText());

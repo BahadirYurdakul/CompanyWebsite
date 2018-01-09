@@ -1,8 +1,6 @@
-package DAO;
+package DataAccessObject;
 
 import com.avaje.ebean.Ebean;
-import com.avaje.ebean.SqlQuery;
-import com.avaje.ebean.SqlRow;
 import models.Article;
 import models.Order;
 import models.User;
@@ -62,7 +60,6 @@ public enum Repository {
         User user = Ebean.find(User.class).where()
                 .eq("username",username)
                 .findList().get(0);
-        user.setPassword("");
         return user;
     }
 

@@ -1,6 +1,6 @@
 package services;
 
-import DAO.Repository;
+import DataAccessObject.Repository;
 import models.User;
 
 public enum  UserService {
@@ -16,6 +16,8 @@ public enum  UserService {
     }
 
     public User getUser(String username) {
-            return repository.getUser(username);
+        User user = repository.getUser(username);
+        user.setPassword("");
+        return user;
     }
 }

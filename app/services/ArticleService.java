@@ -1,6 +1,6 @@
 package services;
 
-import DAO.Repository;
+import DataAccessObject.Repository;
 import models.Article;
 import java.util.List;
 

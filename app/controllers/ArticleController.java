@@ -63,7 +63,7 @@ public class ArticleController extends Controller {
                     articleService.getArticles(page)
             ));
         } catch (Exception e) {
-            return badRequest(Ebean.json().toJson("invalid entry"));
+            return badRequest(Ebean.json().toJson("invalid entry"   ));
         }
     }
 

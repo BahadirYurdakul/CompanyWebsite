@@ -3,32 +3,33 @@
 
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file                       controllers.Assets.versioned(path="/public", file: Asset)
+GET     /assets/*file                                   controllers.Assets.versioned(path="/public", file: Asset)
 
 # Creating a new user to system
-PUT     /accounts/signup                   controllers.UserController.addUser()
+PUT     /accounts/signup                                controllers.UserController.addUser()
 
 # Changing user information
-PUT    /accounts/changeaccountinfo                          controllers.UserController.changeUser()
+PUT    /accounts/changeaccountinfo                      controllers.UserController.changeUser()
 
 # Shows user information with user's orders
-GET     /accounts/:username/accountinfo     controllers.UserController.getUserInfo(username : String)
+GET     /accounts/:username/accountinfo                 controllers.UserController.getUserInfo(username : String)
 
 # Adding an article
-PUT     /addarticle                         controllers.ArticleController.addArticle()
+PUT     /addarticle                                     controllers.ArticleController.addArticle()
 
 #Getting articles list of given page
-GET     /articles/getarticles/page/:page    controllers.ArticleController.getArticleList(page : Int)
+GET     /articles/getarticles/page/:page                controllers.ArticleController.getArticleList(page : Int)
 
 # Getting Articles
-GET     /articles/getarticalinfo/title/:title                controllers.ArticleController.getArticle(title : String)
+GET     /articles/getarticalinfo/title/:title           controllers.ArticleController.getArticle(title : String)
 
 # Adding an order
-PUT     /addorder                           controllers.OrderController.addOrder()
+PUT     /addorder                                       controllers.OrderController.addOrder()
 
 # Cancelling order
-GET     /cancelOrder/:orderid               controllers.OrderController.cancelOrder(orderid : Int)
+GET     /cancelOrder/:orderid                           controllers.OrderController.cancelOrder(orderid : Int)
 
 
 GET     /accounts/:username/orderofaccount/page/:page   controllers.OrderController.getOrders(username : String, page : Int)
 
+POST     /tokens                                        controllers.UserController.createToken()

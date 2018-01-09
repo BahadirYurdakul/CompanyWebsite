@@ -1,6 +1,8 @@
 package controllers;
 
 import com.avaje.ebean.Ebean;
+import com.google.gson.Gson;
+import models.Token;
 import models.User;
 import play.mvc.Controller;
 import play.mvc.Http;
@@ -14,11 +16,12 @@ public class UserController extends Controller {
         try {
             Http.RequestBody body = request().body();
             User user = User.getUser(body.asJson());
+            System.out.println(body.asText());
             return  ok(Ebean.json().toJson(
                  userService.createUser(user)
             ));
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
             return badRequest(Ebean.json().toJson("Creating user failed! Check all conditions"));
         }
     }
@@ -26,24 +29,45 @@ public class UserController extends Controller {
     public Result changeUser() {
       try {
           Http.RequestBody body = request().body();
+          String username = Token.getUsernameFromToken(session("user"));
           User user = User.getUser(body.asJson());
+          user.setUsername(username);
           return ok(Ebean.json().toJson(
                   userService.changeUser(user)
           ));
       } catch (Exception e) {
-          System.out.println(e);
+          e.printStackTrace();
           return badRequest(Ebean.json().toJson("Changing information failed"));
       }
     }
 
-    public Result getUserInfo(String username) {
+    public Result getUserInfo() {
+        String username = Token.getUsernameFromToken(session("user"));
         try {
             return ok(Ebean.json().toJson(
                 userService.getUser(username)
             ));
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
             return badRequest(Ebean.json().toJson("failed!"));
         }
     }
+
+    public Result createToken() {
+       try {
+           Http.RequestBody body = request().body();
+           Token tokenObj = new Gson().fromJson(body.asText(),Token.class);
+           String tokenString = tokenObj.createToken();
+           session("user",tokenString);
+           return redirect("/");
+       } catch (Exception e) {
+           e.printStackTrace();
+           return badRequest("Login failed!");
+       }
+    }
+
+    public Result getUsername(String token) {
+        return ok(Token.getUsernameFromToken(token));
+    }
+
 }

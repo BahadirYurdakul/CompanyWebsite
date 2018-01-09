@@ -14,4 +14,5 @@ libraryDependencies += jdbc
 libraryDependencies += "com.google.code.gson"%"gson"%"2.8.2"
 libraryDependencies += "mysql" % "mysql-connector-java" % "5.1.41"
 libraryDependencies += filters
+libraryDependencies += "com.auth0"%"java-jwt"%"3.3.0"
 

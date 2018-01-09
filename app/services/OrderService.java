@@ -1,7 +1,7 @@
 package services;
 
 import models.Order;
-import DAO.Repository;
+import DataAccessObject.Repository;
 
 import java.util.List;
 
