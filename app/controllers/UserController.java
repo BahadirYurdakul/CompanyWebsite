@@ -19,7 +19,7 @@ public class UserController extends Controller {
             ));
         } catch (Exception e) {
             System.out.println(e);
-            return badRequest("Creating user failed! Check all conditions");
+            return badRequest("{\"err\":\"Creating user failed! Check all conditions\"}");
         }
     }
 
