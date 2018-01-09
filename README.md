@@ -1,3 +1,17 @@
-A company website
+#Company website.
 
-Used play framework and Ebeans. Modified on play java starter example.
+
+Modified of the java starter example to a website.
+
+
+Used play framework.
+
+
+Used Ebean.
+
+
+Used WebApiToken and CORSFilter(Ongoing).
+
+
+
+-Sadik
