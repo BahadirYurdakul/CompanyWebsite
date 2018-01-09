@@ -39,5 +39,11 @@ public class OrderController extends Controller{
         );
     }
 
+    public Result getProducts(int page) {
+        return ok(Ebean.json().toJson(
+                orderService.getProducts(page)
+        ));
+    }
+
 
 }

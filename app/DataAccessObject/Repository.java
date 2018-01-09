@@ -3,6 +3,7 @@ package DataAccessObject;
 import com.avaje.ebean.Ebean;
 import models.Article;
 import models.Order;
+import models.Product;
 import models.User;
 
 import java.util.Date;
@@ -101,5 +102,14 @@ public enum Repository {
         order.setStatus(2);
         order.save();
         return Ebean.find(Order.class,orderId);
+    }
+
+    public List<Product> getProducts(int page) {
+        int pageSize = 10;
+        return
+                db().find(Product.class).where()
+                        .order().desc("productName")
+                        .findPagedList(page, pageSize)
+                        .getList();
     }
 }

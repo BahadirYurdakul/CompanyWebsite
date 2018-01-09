@@ -40,8 +40,8 @@ public class UserController extends Controller {
       }
     }
 
-    public Result getUserInfo() {
-        String username = Token.getUsernameFromToken(request().getHeader("user"));
+    public Result getUserInfo()     {
+        String username = Token.getUsernameFromToken(request().getHeader("token"));
         try {
             return ok(Ebean.json().toJson(
                 userService.getUser(username)

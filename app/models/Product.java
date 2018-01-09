@@ -1,16 +1,33 @@
 package models;
 
-import com.google.gson.Gson;
+import com.avaje.ebean.Model;
+import play.data.validation.Constraints;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
-public class Product {
+@Entity
+public class Product extends Model {
+
+    @Id
+    @Column(name = "productName")
     private final String productName;
+
+    @Constraints.Required
+    @Column(name = "info")
     private final String info;
+
+    @Constraints.Required
+    @Column(name = "photoLink")
     private final String photoLink;
+
+    @Constraints.Required
+    @Column(name = "estimatedArrivalTime")
     private final int estimatedArrivalTime;
+
+    @Constraints.Required
+    @Column(name = "difficultyLevel")
     private final int difficultyLevel;
 
     /**Constructor*/
@@ -43,34 +60,5 @@ public class Product {
         return difficultyLevel;
     }
 
-    public String toJson() {
-        Gson gson = new Gson();
-        return gson.toJson(this);
-    }
 
-    public Product fromJson(String json) {
-        Gson gson = new Gson();
-        return gson.fromJson(json,this.getClass());
-    }
-    
-    public static Product[] mapToProduct(ResultSet rs) {
-        ArrayList<Product> prods = new ArrayList<>();
-        Product[] products = null;
-        try {
-            while (rs.next()) {
-                String productName = rs.getString("productName");
-                String info = rs.getString("info");
-                String photoLink = rs.getString("photoLink");
-                int estimatedArrivalTime = rs.getInt("estimatedArrivalTime");
-                int difficultyLevel = rs.getInt("difficultyLevel");
-                prods.add(new Product(productName,info,photoLink,estimatedArrivalTime,difficultyLevel));
-            }
-
-            products = new Product[prods.size()];
-            products = prods.toArray(products);
-        } catch (SQLException e) {
-            // TODO: 03.12.2017 add logging
-        }
-        return products;
-    }
 }

@@ -33,3 +33,5 @@ GET     /cancelOrder/:orderid                           controllers.OrderControl
 GET     /accounts/:username/orderofaccount/page/:page   controllers.OrderController.getOrders(username : String, page : Int)
 
 POST     /tokens                                        controllers.UserController.createToken()
+
+GET     /getProducts/:page                              controllers.OrderController.getProducts(page : Int)
