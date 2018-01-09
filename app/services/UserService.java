@@ -1,6 +1,7 @@
 package services;
 
 import DataAccessObject.Repository;
+import models.Token;
 import models.User;
 
 public enum  UserService {
@@ -19,5 +20,10 @@ public enum  UserService {
         User user = repository.getUser(username);
         user.setPassword("");
         return user;
+    }
+
+    public boolean checkUser(Token token) {
+        return repository.getUser(token.getUsername()).getPassword().equals(token.getPassword());
+
     }
 }

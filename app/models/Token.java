@@ -3,6 +3,7 @@ package models;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.fasterxml.jackson.databind.JsonNode;
 
 import java.io.UnsupportedEncodingException;
 
@@ -46,6 +47,14 @@ public class Token {
             e.printStackTrace();
         }
         return username;
+    }
+
+    public static Token getToken(JsonNode jsonNode) {
+        return new Token(jsonNode.get("username").asText(),jsonNode.get("password").asText());
+    }
+
+    public static String tokenToJsonString(String string) {
+        return "{ \n \t " + "\"token\" : " + "\"" + string +"\" \n }";
     }
 
 }
