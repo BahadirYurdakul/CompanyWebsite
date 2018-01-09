@@ -23,6 +23,15 @@ create table order (
   constraint pk_order primary key (orderno)
 );
 
+create table product (
+  productname                   varchar(255) not null,
+  info                          varchar(255),
+  photolink                     varchar(255),
+  estimatedarrivaltime          integer,
+  difficultylevel               integer,
+  constraint pk_product primary key (productname)
+);
+
 create table user (
   username                      varchar(255) not null,
   password                      varchar(255),
@@ -41,6 +50,8 @@ create table user (
 drop table if exists article;
 
 drop table if exists order;
+
+drop table if exists product;
 
 drop table if exists user;
 
