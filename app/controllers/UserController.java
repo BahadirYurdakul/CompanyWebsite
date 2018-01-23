@@ -1,6 +1,7 @@
 package controllers;
 
 import com.avaje.ebean.Ebean;
+import com.google.gson.Gson;
 import models.Token;
 import models.User;
 import play.mvc.Controller;
@@ -55,13 +56,13 @@ public class UserController extends Controller {
     public Result createToken() {
        try {
            Http.RequestBody body = request().body();
-           Token tokenObj = Token.getToken(body.asJson());
+           Token tokenObj = new Gson().fromJson(body.asText(),Token.class);
            if(userService.checkUser(tokenObj)) {
                String tokenString = tokenObj.createToken();
                session().remove("user");
                return ok(Token.tokenToJsonString(tokenString));
            }
-           return unauthorized("username or password wrong");
+           return badRequest(new Gson().toJson("sadik"));
        } catch (Exception e) {
            e.printStackTrace();
            return badRequest("Login failed!");

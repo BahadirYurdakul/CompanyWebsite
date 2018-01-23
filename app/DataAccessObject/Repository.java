@@ -105,7 +105,7 @@ public enum Repository {
     }
 
     public List<Product> getProducts(int page) {
-        int pageSize = 10;
+        int pageSize = 5;
         return
                 db().find(Product.class).where()
                         .order().desc("productName")
