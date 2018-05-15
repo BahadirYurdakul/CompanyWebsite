@@ -11,7 +11,3 @@ Used Ebean.
 
 
 Used WebApiToken and CORSFilter(Ongoing).
-
-
-
--Sadik
